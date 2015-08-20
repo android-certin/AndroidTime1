@@ -8,47 +8,47 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 public class LoginActivity extends AppCompatActivity {
-    public static final String LOGINACTIVITY = LoginActivity.class.getSimpleName();
+    public static final String LOGIN_ACTIVITY = LoginActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i(LOGINACTIVITY, "onCreate() called");
+        Log.i(LOGIN_ACTIVITY, "onCreate() called");
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        Log.i(LOGINACTIVITY, "onStart() called");
+        Log.i(LOGIN_ACTIVITY, "onStart() called");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.i(LOGINACTIVITY, "onResume() called");
+        Log.i(LOGIN_ACTIVITY, "onResume() called");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        Log.i(LOGINACTIVITY, "onPause() called");
+        Log.i(LOGIN_ACTIVITY, "onPause() called");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Log.i(LOGINACTIVITY, "onStop() called");
+        Log.i(LOGIN_ACTIVITY, "onStop() called");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.i(LOGINACTIVITY, "onDestroy() called");
+        Log.i(LOGIN_ACTIVITY, "onDestroy() called");
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        Log.i(LOGINACTIVITY, "onRestart() called");
+        Log.i(LOGIN_ACTIVITY, "onRestart() called");
     }
 }
