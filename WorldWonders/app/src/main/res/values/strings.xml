@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">World Wonders</string>
+    <string name="activity_loginname">Login Activity</string>
 </resources>
