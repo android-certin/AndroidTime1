@@ -6,14 +6,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/signup_edit_name"
-        android:hint="Name"
+        android:hint="@string/Name"
         android:layout_margin="8dp"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/signup_edit_username"
-        android:hint="Username"
+        android:hint="@string/Username"
         android:layout_below="@id/signup_edit_name"
         android:layout_margin="8dp"/>
 
@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/signup_edit_password"
-        android:hint="Password"
+        android:hint="@string/Password"
         android:layout_below="@id/signup_edit_username"
         android:layout_margin="8dp"/>
 
@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/signup_btn_signup"
-        android:text="SIGN UP"
+        android:text="@string/SignUp"
         android:layout_below="@id/signup_edit_password"
         android:layout_margin="8dp"
         android:padding="20dp"/>

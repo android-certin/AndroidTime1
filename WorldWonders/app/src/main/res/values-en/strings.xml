@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">World Wonders</string>
+    <string name="activity_login_name">Login Activity</string>
+    <string name="Username">Username</string>
+    <string name="Password">Password</string>
+    <string name="Login">LOGIN</string>
+    <string name="SignUp">SIGN UP</string>
+    <string name="Name">Name</string>
+</resources>

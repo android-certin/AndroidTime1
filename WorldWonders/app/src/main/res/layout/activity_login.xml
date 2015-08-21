@@ -5,14 +5,14 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Username"
+        android:hint="@string/Username"
         android:id="@+id/login_edit_username"
         android:layout_margin="8dp"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Password"
+        android:hint="@string/Password"
         android:id="@+id/login_edit_password"
         android:layout_below="@id/login_edit_username"
         android:layout_margin="8dp"/>
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/login_edit_password"
         android:layout_margin="8dp"
-        android:text="LOGIN"
+        android:text="@string/Login"
         android:id="@+id/login_btn_login"
         android:padding="20dp"/>
 
@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/login_btn_login"
         android:layout_margin="8dp"
-        android:text="SIGN UP"
+        android:text="@string/SignUp"
         android:id="@+id/login_btn_signUp"
         android:padding="20dp"/>
 
