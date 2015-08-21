@@ -15,7 +15,8 @@
         android:hint="@string/Password"
         android:id="@+id/login_edit_password"
         android:layout_below="@id/login_edit_username"
-        android:layout_margin="8dp"/>
+        android:layout_margin="8dp"
+        android:password="true"/>
 
     <Button
         android:layout_width="match_parent"

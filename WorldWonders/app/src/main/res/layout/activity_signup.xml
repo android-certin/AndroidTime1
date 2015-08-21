@@ -23,7 +23,8 @@
         android:id="@+id/signup_edit_password"
         android:hint="@string/Password"
         android:layout_below="@id/signup_edit_username"
-        android:layout_margin="8dp"/>
+        android:layout_margin="8dp"
+        android:password="true"/>
 
     <Button
         android:layout_width="match_parent"

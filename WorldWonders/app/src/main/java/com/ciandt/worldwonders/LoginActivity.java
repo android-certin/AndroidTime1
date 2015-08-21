@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.ciandt.worldwonders.model.User;
 
 public class LoginActivity extends AppCompatActivity {
+    private final int REQUEST_SIGNUP = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +28,8 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
-                startActivityForResult(intent, 0);
+            Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
+            startActivityForResult(intent, REQUEST_SIGNUP);
 
             }
 
@@ -39,9 +40,13 @@ public class LoginActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(data != null) {
-            User user = (User) data.getSerializableExtra("user");
-            EditText edtUsername = (EditText) findViewById(R.id.login_edit_username);
-            edtUsername.setText(user.getUsername());
+            switch (requestCode) {
+                case REQUEST_SIGNUP:
+                User user = (User) data.getSerializableExtra("user");
+                EditText edtUsername = (EditText) findViewById(R.id.login_edit_username);
+                edtUsername.setText(user.getUsername());
+                break;
+            }
         }
     }
 }
