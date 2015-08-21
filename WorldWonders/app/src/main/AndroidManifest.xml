@@ -18,6 +18,9 @@
             android:name=".SignupActivity"
             android:label="Signup Activity"
             />
+        <activity
+            android:name=".WorldWondersActivity"
+            android:label="World Wonders Activity" />
     </application>
 
 
