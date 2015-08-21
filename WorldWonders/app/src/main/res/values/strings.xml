@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Maravilhas do Mundo</string>
+    <string name="activity_login_name">Atividade de Login</string>
+    <string name="Username">Nome do Usuário</string>
+    <string name="Password">Senha</string>
+    <string name="Login">Logar</string>
+    <string name="SignUp">Cadastrar</string>
+    <string name="Name">Name</string>
+</resources>
