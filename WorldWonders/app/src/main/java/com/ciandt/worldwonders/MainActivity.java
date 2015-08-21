@@ -3,6 +3,7 @@
  */
 package com.ciandt.worldwonders;
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,10 +11,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.ciandt.worldwonders.fragments.LoginFragment;
 import com.ciandt.worldwonders.model.User;
 
 public class MainActivity extends AppCompatActivity {
-    private final int REQUEST_SIGNUP = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,30 +22,11 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        Button btnSignUp = (Button) findViewById(R.id.login_btn_signUp);
-        btnSignUp.setOnClickListener(new View.OnClickListener() {
+        LoginFragment loginFragment = new LoginFragment();
+        FragmentManager fragmentManager = getFragmentManager();
 
-            @Override
-            public void onClick(View v) {
-            Intent intent = new Intent(MainActivity.this, SignupActivity.class);
-            startActivityForResult(intent, REQUEST_SIGNUP);
+        fragmentManager.beginTransaction().replace(R.id.fragment_login, loginFragment).commit();
 
-            }
-
-        });
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if(data != null) {
-            switch (requestCode) {
-                case REQUEST_SIGNUP:
-                User user = (User) data.getSerializableExtra("user");
-                EditText edtUsername = (EditText) findViewById(R.id.login_edit_username);
-                edtUsername.setText(user.getUsername());
-                break;
-            }
-        }
-    }
 }
