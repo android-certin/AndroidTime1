@@ -3,52 +3,45 @@
  */
 package com.ciandt.worldwonders;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import com.ciandt.worldwonders.model.User;
 
 public class LoginActivity extends AppCompatActivity {
-    public static final String LOGIN_ACTIVITY = LoginActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i(LOGIN_ACTIVITY, "onCreate() called");
+
+        setContentView(R.layout.activity_login);
+
+        Button btnSignUp = (Button) findViewById(R.id.login_btn_signUp);
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
+                startActivityForResult(intent, 0);
+
+            }
+
+        });
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.i(LOGIN_ACTIVITY, "onStart() called");
-    }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.i(LOGIN_ACTIVITY, "onResume() called");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.i(LOGIN_ACTIVITY, "onPause() called");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.i(LOGIN_ACTIVITY, "onStop() called");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.i(LOGIN_ACTIVITY, "onDestroy() called");
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.i(LOGIN_ACTIVITY, "onRestart() called");
+        if(data != null) {
+            User user = (User) data.getSerializableExtra("user");
+            EditText edtUsername = (EditText) findViewById(R.id.login_edit_username);
+            edtUsername.setText(user.getUsername());
+        }
     }
 }
