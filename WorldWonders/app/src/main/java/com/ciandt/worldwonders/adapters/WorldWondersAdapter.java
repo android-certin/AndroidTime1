@@ -16,29 +16,19 @@ import java.util.List;
  */
 public class WorldWondersAdapter extends FragmentPagerAdapter {
     int pageCount;
-    List<String> listaUrls = new ArrayList<>();
+    List<Wonder> listaWonder;
 
-    public WorldWondersAdapter(FragmentManager fragmentManager, int pageCount) {
+    public WorldWondersAdapter(FragmentManager fragmentManager, ArrayList<Wonder> listWonder) {
 
         super(fragmentManager);
-        this.pageCount = pageCount;
-        getListaUrls();
+        this.pageCount = listWonder.size();
+        this.listaWonder = listWonder;
     }
 
     @Override
     public Fragment getItem(int position) {
-        Wonder wonder = new Wonder();
-        wonder.setPhoto(listaUrls.get(position));
-        HighlightFragment wonderFragment = HighlightFragment.newInstance(wonder);
-
+        HighlightFragment wonderFragment = HighlightFragment.newInstance(listaWonder.get(position));
         return wonderFragment;
-    }
-
-    public List<String> getListaUrls() {
-        listaUrls.add(0, "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Kheops-Pyramid.jpg/1024px-Kheops-Pyramid.jpg");
-        listaUrls.add(1, "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Hanging_Gardens_of_Babylon.jpg/350px-Hanging_Gardens_of_Babylon.jpg");
-        listaUrls.add(2, "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Statue_of_Zeus.jpg/220px-Statue_of_Zeus.jpg");
-        return listaUrls;
     }
 
     @Override

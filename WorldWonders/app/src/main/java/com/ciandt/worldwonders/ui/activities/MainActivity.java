@@ -9,9 +9,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.ciandt.worldwonders.R;
+import com.ciandt.worldwonders.database.WonderDao;
 import com.ciandt.worldwonders.ui.fragments.LoginFragment;
 import com.ciandt.worldwonders.ui.fragments.WorldWondersFragment;
 import com.ciandt.worldwonders.model.Wonder;
+
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -42,7 +45,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void addWondersFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
-        WorldWondersFragment worldWondersFragment =  WorldWondersFragment.newInstance(new Wonder());
+        WonderDao wonderDao = new WonderDao(getApplicationContext());
+        ArrayList<Wonder> listWonder = (ArrayList) wonderDao.getAll();
+        WorldWondersFragment worldWondersFragment =  WorldWondersFragment.newInstance(listWonder);
         fragmentManager.beginTransaction()
                 .replace(R.id.fragment_login, worldWondersFragment, "login")
                 .commit();

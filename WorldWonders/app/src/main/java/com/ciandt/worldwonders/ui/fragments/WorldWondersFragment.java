@@ -13,6 +13,7 @@ import com.ciandt.worldwonders.adapters.WorldWondersAdapter;
 import com.ciandt.worldwonders.database.WonderDao;
 import com.ciandt.worldwonders.model.Wonder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,13 +21,12 @@ import java.util.List;
  */
 public class WorldWondersFragment extends Fragment {
 
-    private final int NUMBER_OF_PAGES = 3;
-    private final static String WORLD_WONDERS = "wonder";
+    private final static String WORLD_WONDERS = "wonders";
 
-    public static WorldWondersFragment newInstance(Wonder wonder) {
+    public static WorldWondersFragment newInstance(ArrayList<Wonder> listWonder) {
         WorldWondersFragment wonderFragment =  new WorldWondersFragment();
         Bundle bundle = new Bundle(1);
-        bundle.putSerializable(WORLD_WONDERS, wonder);
+        bundle.putSerializable(WORLD_WONDERS, listWonder);
         wonderFragment.setArguments(bundle);
         return wonderFragment;
     }
@@ -42,8 +42,8 @@ public class WorldWondersFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ViewPager viewPager = (ViewPager)view.findViewById(R.id.pager_wonder);
-
-        WorldWondersAdapter worldWondersAdapter = new WorldWondersAdapter(getFragmentManager(), NUMBER_OF_PAGES);
+        ArrayList<Wonder> listWonder = (ArrayList) getArguments().getSerializable(WORLD_WONDERS);
+        WorldWondersAdapter worldWondersAdapter = new WorldWondersAdapter(getFragmentManager(), listWonder);
         viewPager.setAdapter(worldWondersAdapter);
 
     }

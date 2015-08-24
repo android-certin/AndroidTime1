@@ -1,5 +1,7 @@
 package com.ciandt.worldwonders.ui.fragments;
 
+import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -48,9 +50,17 @@ public class HighlightFragment extends Fragment {
             ImageView imageView = (ImageView) view.findViewById(R.id.imageView);
 
             Picasso.with(view.getContext())
-                    .load(wonder.getPhoto())
+                    .load(getRawResourceID(view.getContext(), wonder.getPhoto().replace(".jpg", "")))
+                    .config(Bitmap.Config.RGB_565)
                     .into(imageView);
 
+            textView.setText(wonder.getName());
+
         }
+    }
+
+
+    public static int getRawResourceID(Context context, String rawResourceName) {
+        return context.getResources().getIdentifier(rawResourceName, "raw", context.getPackageName());
     }
 }
