@@ -3,6 +3,7 @@
 
 
     <application
+        android:name=".WorldWondersApp"
         android:allowBackup="true" android:label="@string/app_name"
         android:icon="@mipmap/ic_launcher" android:theme="@style/AppTheme">
         <activity

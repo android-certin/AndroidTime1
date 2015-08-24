@@ -21,10 +21,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        initLoginFragment();
+        addLoginFragment();
     }
 
-    private void initLoginFragment() {
+    private void addLoginFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         LoginFragment loginFragment =  new LoginFragment();
 
@@ -35,15 +35,14 @@ public class MainActivity extends AppCompatActivity {
         loginFragment.setOnLoginListener(new LoginFragment.OnLoginListener() {
             @Override
             public void onLogin(Wonder wonder) {
-                initWondersFragment();
+                addWondersFragment();
             }
         });
     }
 
-    private void initWondersFragment() {
+    private void addWondersFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         WorldWondersFragment worldWondersFragment =  WorldWondersFragment.newInstance(new Wonder());
-
         fragmentManager.beginTransaction()
                 .replace(R.id.fragment_login, worldWondersFragment, "login")
                 .commit();

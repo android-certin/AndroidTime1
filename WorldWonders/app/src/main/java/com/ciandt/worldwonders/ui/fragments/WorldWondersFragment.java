@@ -10,7 +10,10 @@ import android.view.ViewGroup;
 
 import com.ciandt.worldwonders.R;
 import com.ciandt.worldwonders.adapters.WorldWondersAdapter;
+import com.ciandt.worldwonders.database.WonderDao;
 import com.ciandt.worldwonders.model.Wonder;
+
+import java.util.List;
 
 /**
  * Created by jfranco on 8/24/15.
