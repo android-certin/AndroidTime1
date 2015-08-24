@@ -3,6 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    //Toda vez que for usado um componente vindo de biblioteca, deve-se colocar o nome do pacote todo.
     <android.support.v4.view.ViewPager
         android:id="@+id/pager_wonder"
         android:layout_width="match_parent"

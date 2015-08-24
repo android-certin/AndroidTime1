@@ -23,6 +23,5 @@ public class WorldWondersActivity extends AppCompatActivity {
 
         WorldWondersAdapter worldWondersAdapter = new WorldWondersAdapter(getSupportFragmentManager(), NUMBER_OF_PAGES);
         viewPager.setAdapter(worldWondersAdapter);
-        viewPager.setCurrentItem(FIRST_PAGE);
     }
 }
