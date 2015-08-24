@@ -6,10 +6,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ciandt.worldwonders.R;
 import com.ciandt.worldwonders.model.Wonder;
+
+import it.sephiroth.android.library.picasso.Picasso;
 
 /**
  * Created by jfranco on 8/21/15.
@@ -42,7 +45,12 @@ public class HighlightFragment extends Fragment {
 
         if (arguments != null) {
             Wonder wonder = (Wonder) arguments.getSerializable(EXTRA_WONDER);
-            textView.setText(wonder.toString());
+            ImageView imageView = (ImageView) view.findViewById(R.id.imageView);
+
+            Picasso.with(view.getContext())
+                    .load(wonder.getPhoto())
+                    .into(imageView);
+
         }
     }
 }
