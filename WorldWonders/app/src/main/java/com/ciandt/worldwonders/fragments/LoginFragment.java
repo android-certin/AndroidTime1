@@ -14,6 +14,7 @@ import com.ciandt.worldwonders.R;
 import com.ciandt.worldwonders.SignupActivity;
 import com.ciandt.worldwonders.WorldWondersActivity;
 import com.ciandt.worldwonders.model.User;
+import com.ciandt.worldwonders.model.Wonder;
 
 /**
  * Created by jfranco on 8/21/15.
@@ -22,8 +23,13 @@ public class LoginFragment extends Fragment {
 
     private final int REQUEST_SIGNUP = 1;
 
-   private EditText edtUsername;
+    private EditText edtUsername;
 
+    private OnLoginListener onLoginListener;
+
+    public void setOnLoginListener(OnLoginListener onLoginListener) {
+        this.onLoginListener = onLoginListener;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,14 +57,13 @@ public class LoginFragment extends Fragment {
     }
 
     private void loginButtonAction(View view) {
+
         Button btnLogin = (Button) view.findViewById(R.id.login_btn_login);
         btnLogin.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginFragment.this.getActivity(), WorldWondersActivity.class);
-                startActivity(intent);
-
+                onLoginListener.onLogin(new Wonder());
             }
 
         });
@@ -90,5 +95,9 @@ public class LoginFragment extends Fragment {
                     break;
             }
         }
+    }
+
+    public interface OnLoginListener {
+        public void onLogin(Wonder wonder);
     }
 }
