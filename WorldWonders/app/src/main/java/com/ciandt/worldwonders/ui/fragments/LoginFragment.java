@@ -1,4 +1,4 @@
-package com.ciandt.worldwonders.fragments;
+package com.ciandt.worldwonders.ui.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,8 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.ciandt.worldwonders.R;
-import com.ciandt.worldwonders.SignupActivity;
-import com.ciandt.worldwonders.WorldWondersActivity;
+import com.ciandt.worldwonders.ui.activities.SignupActivity;
 import com.ciandt.worldwonders.model.User;
 import com.ciandt.worldwonders.model.Wonder;
 

@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.ciandt.worldwonders.fragments.HighlightFragment;
+import com.ciandt.worldwonders.ui.fragments.HighlightFragment;
 import com.ciandt.worldwonders.model.Wonder;
 
 /**

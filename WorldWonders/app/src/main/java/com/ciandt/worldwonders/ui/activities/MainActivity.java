@@ -1,16 +1,16 @@
 /**
  * Created by pmachado on 8/20/15.
  */
-package com.ciandt.worldwonders;
+package com.ciandt.worldwonders.ui.activities;
 
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
-import com.ciandt.worldwonders.fragments.LoginFragment;
-import com.ciandt.worldwonders.fragments.HighlightFragment;
-import com.ciandt.worldwonders.fragments.WorldWondersFragment;
+import com.ciandt.worldwonders.R;
+import com.ciandt.worldwonders.ui.fragments.LoginFragment;
+import com.ciandt.worldwonders.ui.fragments.WorldWondersFragment;
 import com.ciandt.worldwonders.model.Wonder;
 
 

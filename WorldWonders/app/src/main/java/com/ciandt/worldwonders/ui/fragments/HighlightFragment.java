@@ -1,4 +1,4 @@
-package com.ciandt.worldwonders.fragments;
+package com.ciandt.worldwonders.ui.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
