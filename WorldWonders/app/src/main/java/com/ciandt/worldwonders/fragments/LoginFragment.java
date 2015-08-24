@@ -3,6 +3,7 @@ package com.ciandt.worldwonders.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,7 @@ import com.ciandt.worldwonders.model.User;
 /**
  * Created by jfranco on 8/21/15.
  */
-public class LoginFragment extends android.app.Fragment {
+public class LoginFragment extends Fragment {
 
     private final int REQUEST_SIGNUP = 1;
 
@@ -44,18 +45,12 @@ public class LoginFragment extends android.app.Fragment {
 
         edtUsername = (EditText) view.findViewById(R.id.login_edit_username);
 
-        Button btnSignUp = (Button) view.findViewById(R.id.login_btn_signUp);
-        btnSignUp.setOnClickListener(new View.OnClickListener() {
+        signUpButtonAction(view);
 
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginFragment.this.getActivity(), SignupActivity.class);
-                startActivityForResult(intent, REQUEST_SIGNUP);
+        loginButtonAction(view);
+    }
 
-            }
-
-        });
-
+    private void loginButtonAction(View view) {
         Button btnLogin = (Button) view.findViewById(R.id.login_btn_login);
         btnLogin.setOnClickListener(new View.OnClickListener() {
 
@@ -63,6 +58,20 @@ public class LoginFragment extends android.app.Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(LoginFragment.this.getActivity(), WorldWondersActivity.class);
                 startActivity(intent);
+
+            }
+
+        });
+    }
+
+    private void signUpButtonAction(View view) {
+        Button btnSignUp = (Button) view.findViewById(R.id.login_btn_signUp);
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginFragment.this.getActivity(), SignupActivity.class);
+                startActivityForResult(intent, REQUEST_SIGNUP);
 
             }
 

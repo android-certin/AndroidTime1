@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.ciandt.worldwonders.R;
 
@@ -14,20 +15,33 @@ import com.ciandt.worldwonders.R;
  */
 public class WorldWondersFragment extends Fragment {
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    private View view;
+    private static final String EXTRA_TEXT = "text";
+
+    public static WorldWondersFragment openPageDynamic(String text) {
+        WorldWondersFragment wonderFragment =  new WorldWondersFragment();
+        Bundle bundle = new Bundle(1);
+        bundle.putString(EXTRA_TEXT, text);
+        wonderFragment.setArguments(bundle);
+        return wonderFragment;
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_world_wonders, container);
+        view = inflater.inflate(R.layout.fragment_world_wonders, container, false);
         return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+        TextView textView =  (TextView)view.findViewById(R.id.textView);
+
+        Bundle arguments = getArguments();
+
+        if (arguments != null) {
+            String text = arguments.getString(EXTRA_TEXT);
+            textView.setText(text);
+        }
     }
 }
