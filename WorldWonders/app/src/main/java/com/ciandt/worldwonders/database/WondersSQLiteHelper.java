@@ -28,10 +28,7 @@ public class WondersSQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        //roda o script do banco
-//        if (!checkDataBase()) {
-//            createDatabase();
-//        }
+
     }
 
     @Override
@@ -54,8 +51,8 @@ public class WondersSQLiteHelper extends SQLiteOpenHelper {
         try {
             checkDB = SQLiteDatabase.openDatabase(DATABASE_PATH, null, SQLiteDatabase.OPEN_READONLY);
             checkDB.close();
-        } catch (SQLiteException e) {
-            Log.i("WondersSQLiteHelper", "Banco de dados ainda não existe.");
+        } catch (SQLiteException sqlLiteException) {
+            Log.e("WondersSQLiteHelper", "Banco de dados ainda não existe.", sqlLiteException);
         } finally {
             return checkDB != null;
         }
@@ -72,10 +69,9 @@ public class WondersSQLiteHelper extends SQLiteOpenHelper {
             directory.mkdirs();
         }
 
-        OutputStream outStream = null;
-        outStream = new FileOutputStream(destFile); // for override file content
-        //outStream = new FileOutputStream(file2,<strong>true</strong>); // for append file content
+        OutputStream outStream = new FileOutputStream(destFile);
 
+        //Transfer bytes from in to out
         byte[] buffer = new byte[1024];
 
         int length;
@@ -86,8 +82,6 @@ public class WondersSQLiteHelper extends SQLiteOpenHelper {
 
         if (sourceInput != null)sourceInput.close();
         if (outStream != null)outStream.close();
-
-        Log.i("WondersSQLiteHelper", "File copied.");
     }
 
 }

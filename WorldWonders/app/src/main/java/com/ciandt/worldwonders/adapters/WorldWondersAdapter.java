@@ -16,12 +16,13 @@ import java.util.List;
  */
 public class WorldWondersAdapter extends FragmentPagerAdapter {
     int pageCount;
+    private final int LIMIT_PAGE = 3;
     List<Wonder> listaWonder;
 
     public WorldWondersAdapter(FragmentManager fragmentManager, ArrayList<Wonder> listWonder) {
 
         super(fragmentManager);
-        this.pageCount = listWonder.size();
+        this.pageCount = LIMIT_PAGE;
         this.listaWonder = listWonder;
     }
 

@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ciandt.worldwonders.R;
+import com.ciandt.worldwonders.helpers.Helpers;
 import com.ciandt.worldwonders.model.Wonder;
 
 import it.sephiroth.android.library.picasso.Picasso;
@@ -41,7 +42,7 @@ public class HighlightFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        TextView textView =  (TextView)view.findViewById(R.id.textView);
+        TextView textView =  (TextView)view.findViewById(R.id.imageTitle);
 
         Bundle arguments = getArguments();
 
@@ -50,17 +51,12 @@ public class HighlightFragment extends Fragment {
             ImageView imageView = (ImageView) view.findViewById(R.id.imageView);
 
             Picasso.with(view.getContext())
-                    .load(getRawResourceID(view.getContext(), wonder.getPhoto().replace(".jpg", "")))
+                    .load(Helpers.getRawResourceID(view.getContext(), wonder.getPhoto().split("\\.")[0]))
                     .config(Bitmap.Config.RGB_565)
                     .into(imageView);
 
             textView.setText(wonder.getName());
 
         }
-    }
-
-
-    public static int getRawResourceID(Context context, String rawResourceName) {
-        return context.getResources().getIdentifier(rawResourceName, "raw", context.getPackageName());
     }
 }

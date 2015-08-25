@@ -45,9 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void addWondersFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
-        WonderDao wonderDao = new WonderDao(getApplicationContext());
-        ArrayList<Wonder> listWonder = (ArrayList) wonderDao.getAll();
-        WorldWondersFragment worldWondersFragment =  WorldWondersFragment.newInstance(listWonder);
+        WorldWondersFragment worldWondersFragment =  WorldWondersFragment.newInstance();
         fragmentManager.beginTransaction()
                 .replace(R.id.fragment_login, worldWondersFragment, "login")
                 .commit();
