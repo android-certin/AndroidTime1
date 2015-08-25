@@ -13,7 +13,7 @@ import com.ciandt.worldwonders.model.User;
 /**
  * Created by eferraz on 21/08/15.
  */
-public class SignupActivity extends AppCompatActivity {
+public class SignupActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

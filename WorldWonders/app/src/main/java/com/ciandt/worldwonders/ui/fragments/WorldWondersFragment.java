@@ -75,6 +75,7 @@ public class WorldWondersFragment extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
 
         adapter.setOnSelectItem(new WorldWonderAdapter.OnSelectItem() {

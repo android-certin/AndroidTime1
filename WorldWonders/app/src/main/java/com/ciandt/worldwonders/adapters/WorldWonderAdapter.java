@@ -33,7 +33,7 @@ public class WorldWonderAdapter extends RecyclerView.Adapter<WorldWonderHolder> 
     @Override
     public WorldWonderHolder onCreateViewHolder(ViewGroup viewGroup, int position) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_wonder, viewGroup, false);
-        WorldWonderHolder holder = new WorldWonderHolder(context, view);
+        WorldWonderHolder holder = new WorldWonderHolder(view);
         return holder;
     }
 
