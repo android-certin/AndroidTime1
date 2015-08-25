@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.ciandt.worldwonders.R;
 import com.ciandt.worldwonders.adapters.HighlightAdapter;
@@ -20,6 +21,8 @@ import com.ciandt.worldwonders.repository.WondersRepository;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import holders.WorldWonderHolder;
 
 /**
  * Created by jfranco on 8/24/15.
@@ -50,6 +53,9 @@ public class WorldWondersFragment extends Fragment {
         repository.getAll(new WondersRepository.WonderAllListener() {
             @Override
             public void onWonderAll(Exception exception, List<Wonder> wonders) {
+
+
+
                 createWorldWonder(wonders, view);
                 createHighlight(wonders);
             }
@@ -70,6 +76,13 @@ public class WorldWondersFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
+
+        adapter.setOnSelectItem(new WorldWonderAdapter.OnSelectItem() {
+            @Override
+            public void onSelectItem(Wonder wonder) {
+                Toast.makeText(getContext(), wonder.getName(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 }

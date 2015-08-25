@@ -18,6 +18,7 @@ import java.io.OutputStream;
 public class WondersSQLiteHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "wonders.db";
+    private static final String DATABASE_PATH_PROJECT = "database/";
     private static final String DATABASE_DIRECTORY = "data/data/com.ciandt.worldwonders/databases/";
     private static final String DATABASE_PATH = DATABASE_DIRECTORY + DATABASE_NAME;
     private static final int DATABASE_VERSION = 1;
@@ -37,11 +38,10 @@ public class WondersSQLiteHelper extends SQLiteOpenHelper {
     }
 
     public static void createDatabase(Context context) throws IOException {
-        Log.i("WondersSQLiteHelper", "Criando database");
-        InputStream original = context.getAssets().open("database/wonders.db");
-        File dest = new File(DATABASE_PATH);
+        InputStream original = context.getAssets().open(DATABASE_PATH_PROJECT+DATABASE_NAME);
+        File copy = new File(DATABASE_PATH);
         if(!checkFileDatabase()) {
-            copyFile(original, dest);
+            copyFile(original, copy);
         }
 
     }

@@ -23,6 +23,7 @@ public class WorldWonderAdapter extends RecyclerView.Adapter<WorldWonderHolder> 
 
     public Context context;
     public ArrayList<Wonder> wonders;
+    private OnSelectItem onSelectItem;
 
     public WorldWonderAdapter(Context context, ArrayList<Wonder> wonders) {
         this.context = context;
@@ -64,9 +65,17 @@ public class WorldWonderAdapter extends RecyclerView.Adapter<WorldWonderHolder> 
         worldWonderHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(), wonder.getName(), Toast.LENGTH_SHORT).show();
+                onSelectItem.onSelectItem(wonder);
             }
         });
+    }
+
+    public interface OnSelectItem {
+        void onSelectItem(Wonder wonder);
+    }
+
+    public void setOnSelectItem(OnSelectItem onSelectItem) {
+        this.onSelectItem = onSelectItem;
     }
 
     @Override
