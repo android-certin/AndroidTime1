@@ -55,6 +55,8 @@ public class HighlightFragment extends Fragment {
                     .config(Bitmap.Config.RGB_565)
                     .placeholder(R.raw.place_holder)
                     .error(R.raw.place_holder)
+                    .centerCrop()
+                    .resize(250, 165)
                     .into(imageView);
 
             textView.setText(wonder.getName());

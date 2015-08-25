@@ -14,12 +14,12 @@ import java.util.List;
 /**
  * Created by jfranco on 8/23/15.
  */
-public class WorldWondersAdapter extends FragmentPagerAdapter {
+public class HighlightAdapter extends FragmentPagerAdapter {
     int pageCount;
     private final int LIMIT_PAGE = 3;
     List<Wonder> listaWonder;
 
-    public WorldWondersAdapter(FragmentManager fragmentManager, ArrayList<Wonder> listWonder) {
+    public HighlightAdapter(FragmentManager fragmentManager, ArrayList<Wonder> listWonder) {
 
         super(fragmentManager);
         this.pageCount = LIMIT_PAGE;
