@@ -33,9 +33,6 @@ public class HighlightAdapter extends FragmentPagerAdapter {
     }
 
     @Override
-    /**
-     * Quantidade de páginas
-     */
     public int getCount() {
         return this.pageCount;
     }

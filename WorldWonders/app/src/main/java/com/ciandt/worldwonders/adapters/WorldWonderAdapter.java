@@ -2,12 +2,12 @@ package com.ciandt.worldwonders.adapters;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.ciandt.worldwonders.R;
 import com.ciandt.worldwonders.helpers.Helpers;
@@ -30,16 +30,22 @@ public class WorldWonderAdapter extends RecyclerView.Adapter<WorldWonderHolder> 
     }
 
     @Override
-    public WorldWonderHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public WorldWonderHolder onCreateViewHolder(ViewGroup viewGroup, int position) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_wonder, viewGroup, false);
         WorldWonderHolder holder = new WorldWonderHolder(context, view);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(WorldWonderHolder worldWonderHolder, int i) {
-        Wonder wonder = wonders.get(i);
+    public void onBindViewHolder(WorldWonderHolder worldWonderHolder, int position) {
+        final Wonder wonder = wonders.get(position);
 
+        setListView(worldWonderHolder, wonder);
+
+        onClickListView(worldWonderHolder, wonder);
+    }
+
+    private void setListView(WorldWonderHolder worldWonderHolder, Wonder wonder) {
         ImageView imageView = worldWonderHolder.worldWonderImage;
 
         Picasso.with(context)
@@ -51,8 +57,16 @@ public class WorldWonderAdapter extends RecyclerView.Adapter<WorldWonderHolder> 
                 .resize(250, 165)
                 .into(imageView);
 
-
         worldWonderHolder.worldWonderTitle.setText(wonder.getName());
+    }
+
+    private void onClickListView(WorldWonderHolder worldWonderHolder, final Wonder wonder) {
+        worldWonderHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(view.getContext(), wonder.getName(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
