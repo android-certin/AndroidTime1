@@ -2,6 +2,7 @@ package com.ciandt.worldwonders.ui.activities;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.view.MenuItemCompat;
@@ -11,8 +12,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.ciandt.worldwonders.R;
+import com.ciandt.worldwonders.database.BookmarkDao;
 import com.ciandt.worldwonders.helpers.Helpers;
+import com.ciandt.worldwonders.model.Bookmark;
 import com.ciandt.worldwonders.model.Wonder;
 
 import it.sephiroth.android.library.picasso.Picasso;
@@ -23,6 +28,7 @@ import it.sephiroth.android.library.picasso.Picasso;
  */
 public class WonderDetailActivity extends BaseActivity {
     private final String EXTRA_WONDER = "wonder";
+    private Wonder wonder;
 
     private ShareActionProvider mShareActionProvider;
 
@@ -31,7 +37,7 @@ public class WonderDetailActivity extends BaseActivity {
         super.onCreate(bundle);
         setContentView(R.layout.activity_detail);
 
-        Wonder wonder = (Wonder) getIntent().getSerializableExtra(EXTRA_WONDER);
+        wonder = (Wonder) getIntent().getSerializableExtra(EXTRA_WONDER);
 
 //        supportPostponeEnterTransition();
 
@@ -64,12 +70,44 @@ public class WonderDetailActivity extends BaseActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
+
+        switch(item.getItemId()) {
+            case R.id.action_share :
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, wonder.getDescription());
+                sendIntent.setType("text/plain");
+                startActivity(sendIntent);
+            break;
+
+            case R.id.action_bookmark:
+                BookmarkDao bookmarkDao = new BookmarkDao(this);
+                Bookmark bookmark = new Bookmark();
+                bookmark.setIdWonders(wonder.getId());
+                bookmarkDao.insert(bookmark);
+                Toast.makeText(this, "Bookmark salvo com sucesso.", Toast.LENGTH_SHORT).show();
+            break;
+
+            case R.id.action_direction:
+                if(wonder.getLatitude() != 0.0 && wonder.getLongitude() != 0.0) {
+                    Uri gmmIntentUri = Uri.parse("geo:"+ wonder.getLatitude() + "," +  wonder.getLongitude());
+
+                    Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                    mapIntent.setPackage("com.google.android.apps.maps");
+
+                    startActivity(mapIntent);
+                } else {
+                    Toast.makeText(this, "Monumento não possui latitude, longitude cadastrada.", Toast.LENGTH_SHORT).show();
+                }
+            break;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate menu resource file.
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
         MenuItem item = menu.findItem(R.id.action_bookmark);
@@ -78,7 +116,6 @@ public class WonderDetailActivity extends BaseActivity {
         return true;
     }
 
-    // Call to update the share intent
     private void setShareIntent(Intent shareIntent) {
         if (mShareActionProvider != null) {
             mShareActionProvider.setShareIntent(shareIntent);
