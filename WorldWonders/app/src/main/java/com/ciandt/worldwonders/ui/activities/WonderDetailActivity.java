@@ -15,7 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ciandt.worldwonders.R;
-import com.ciandt.worldwonders.database.BookmarkDao;
 import com.ciandt.worldwonders.helpers.Helpers;
 import com.ciandt.worldwonders.model.Bookmark;
 import com.ciandt.worldwonders.model.Wonder;
@@ -86,7 +85,7 @@ public class WonderDetailActivity extends BaseActivity {
                 Bookmark bookmark = new Bookmark();
                 bookmark.setIdWonders(wonder.getId());
                 WondersRepository repository = new WondersRepository(this);
-                repository.insert(bookmark, new WondersRepository.BookmarkInsertListener() {
+                repository.insertBookmark(bookmark, new WondersRepository.BookmarkInsertListener() {
                     @Override
                     public void onBookmarkInsert(Exception exception, Boolean result) {
                         isInserted(result);

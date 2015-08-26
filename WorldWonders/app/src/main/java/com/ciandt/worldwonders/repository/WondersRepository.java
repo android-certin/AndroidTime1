@@ -54,7 +54,7 @@ public class WondersRepository {
     }
 
     @NonNull
-    public void insert(final Bookmark bookmark, final BookmarkInsertListener bookmarkInsertListener) {
+    public void insertBookmark(final Bookmark bookmark, final BookmarkInsertListener bookmarkInsertListener) {
 
         AsyncTask<Bookmark, Void, Boolean> asyncTask = new AsyncTask<Bookmark, Void, Boolean>() {
 
@@ -80,12 +80,31 @@ public class WondersRepository {
         asyncTask.execute();
     }
 
-    public interface BookmarkInsertListener{
-        void onBookmarkInsert(Exception exception, Boolean result);
-    }
+    @NonNull
+    public void getAllBookmarks(final BookmarkAllListener bookmarkAllListener) {
 
-    public interface  WonderAllListener{
-        void onWonderAll(Exception exception, List<Wonder> wonders);
+        AsyncTask<Void, Void, List<Bookmark>> asyncTask = new AsyncTask<Void, Void, List<Bookmark>>() {
+
+            @Override
+            protected List<Bookmark> doInBackground(Void... voids) {
+                AbstractDao<Bookmark> abstractDao = new BookmarkDao(context);
+                List<Bookmark> result = abstractDao.getAll();
+                abstractDao.close();
+
+                return result;
+            }
+
+            @Override
+            protected void onPostExecute(List<Bookmark> bookmarks) {
+                super.onPostExecute(bookmarks);
+                bookmarkAllListener.onBookmarkAll(null, bookmarks);
+                tasks.remove(this);
+            }
+        };
+
+        tasks.add(asyncTask);
+
+        asyncTask.execute();
     }
 
     public void cancel() {
@@ -95,4 +114,17 @@ public class WondersRepository {
             }
         }
     }
+
+    public interface BookmarkInsertListener{
+        void onBookmarkInsert(Exception exception, Boolean result);
+    }
+
+    public interface  WonderAllListener{
+        void onWonderAll(Exception exception, List<Wonder> wonders);
+    }
+
+    public interface  BookmarkAllListener{
+        void onBookmarkAll(Exception exception, List<Bookmark> bookmarks);
+    }
+
 }
