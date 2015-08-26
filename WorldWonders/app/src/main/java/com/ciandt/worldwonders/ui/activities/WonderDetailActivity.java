@@ -1,14 +1,16 @@
 package com.ciandt.worldwonders.ui.activities;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v4.view.ViewCompat;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.ciandt.worldwonders.R;
 import com.ciandt.worldwonders.helpers.Helpers;
 import com.ciandt.worldwonders.model.Wonder;
@@ -21,6 +23,8 @@ import it.sephiroth.android.library.picasso.Picasso;
  */
 public class WonderDetailActivity extends BaseActivity {
     private final String EXTRA_WONDER = "wonder";
+
+    private ShareActionProvider mShareActionProvider;
 
     @Override
     public void onCreate(Bundle bundle) {
@@ -57,4 +61,28 @@ public class WonderDetailActivity extends BaseActivity {
                 .into(imageView);
 
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate menu resource file.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        MenuItem item = menu.findItem(R.id.action_bookmark);
+        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
+
+        return true;
+    }
+
+    // Call to update the share intent
+    private void setShareIntent(Intent shareIntent) {
+        if (mShareActionProvider != null) {
+            mShareActionProvider.setShareIntent(shareIntent);
+        }
+    }
+
 }
