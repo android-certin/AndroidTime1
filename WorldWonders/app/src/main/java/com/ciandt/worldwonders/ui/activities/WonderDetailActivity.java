@@ -19,6 +19,7 @@ import com.ciandt.worldwonders.database.BookmarkDao;
 import com.ciandt.worldwonders.helpers.Helpers;
 import com.ciandt.worldwonders.model.Bookmark;
 import com.ciandt.worldwonders.model.Wonder;
+import com.ciandt.worldwonders.repository.WondersRepository;
 
 import it.sephiroth.android.library.picasso.Picasso;
 
@@ -82,11 +83,16 @@ public class WonderDetailActivity extends BaseActivity {
             break;
 
             case R.id.action_bookmark:
-                BookmarkDao bookmarkDao = new BookmarkDao(this);
                 Bookmark bookmark = new Bookmark();
                 bookmark.setIdWonders(wonder.getId());
-                bookmarkDao.insert(bookmark);
-                Toast.makeText(this, "Bookmark salvo com sucesso.", Toast.LENGTH_SHORT).show();
+                WondersRepository repository = new WondersRepository(this);
+                repository.insert(bookmark, new WondersRepository.BookmarkInsertListener() {
+                    @Override
+                    public void onBookmarkInsert(Exception exception, Boolean result) {
+                        isInserted(result);
+                    }
+                });
+
             break;
 
             case R.id.action_direction:
@@ -105,6 +111,14 @@ public class WonderDetailActivity extends BaseActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    private void isInserted(Boolean result) {
+        if(result) {
+            Toast.makeText(this, "Bookmark salvo com sucesso.", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Erro ao salvar o Bookmark.", Toast.LENGTH_SHORT).show();
+        }
+     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

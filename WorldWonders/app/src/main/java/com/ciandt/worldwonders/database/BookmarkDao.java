@@ -98,7 +98,6 @@ public class BookmarkDao implements AbstractDao<Bookmark> {
     private ContentValues createContentValues(Bookmark bookmark) {
         ContentValues values = new ContentValues();
 
-        values.put("id", bookmark.getId());
         values.put("idWonders", bookmark.getIdWonders());
 
         return values;
