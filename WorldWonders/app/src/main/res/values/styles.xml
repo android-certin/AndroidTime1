@@ -11,15 +11,21 @@
         <item name="android:buttonStyle">@style/AppTheme.Widget.Button</item>
         <item name="android:editTextStyle">@style/AppTheme.Widget.EditText</item>
         <item name="android:textAppearanceButton">@style/AppTheme.TextApperance.Button</item>
+        <item name="android:textViewStyle">@style/AppTheme.Widget.TextView</item>
     </style>
 
     <style name="AppTheme.Widget.Toolbar" parent="Widget.AppCompat.Toolbar">
         <item name="android:minHeight">?attr/actionBarSize</item>
         <item name="android:background">?attr/colorPrimary</item>
+        <item name="android:textColor">@color/primary_light</item>
     </style>
 
     <style name="AppTheme.Widget.Toolbar.Transparent" parent="@style/AppTheme.Widget.Toolbar">
         <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="AppTheme.Widget.Toolbar.Text" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/primary_light</item>
     </style>
 
     <style name="AppTheme.Widget.Button" parent="Widget.AppCompat.Button">
@@ -36,6 +42,9 @@
     </style>
 
     <style name="AppTheme.Widget.EditText" parent="Widget.AppCompat.EditText">
+        <item name="fontPath">fonts/Roboto-Regular.ttf</item>
+    </style>
+    <style name="AppTheme.Widget.TextView" parent="android:Widget.TextView">
         <item name="fontPath">fonts/Roboto-Regular.ttf</item>
     </style>
 

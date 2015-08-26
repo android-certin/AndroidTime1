@@ -19,6 +19,6 @@
         android:paddingLeft="8dp"
         android:textColor="#ffffff"
         android:shadowColor="#000000"
-        android:background="#33000000"/>
+        android:background="#70000000"/>
 
 </RelativeLayout>

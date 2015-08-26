@@ -13,6 +13,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/detail_description_wonder"
+            android:layout_margin="10dp"
+            android:layout_gravity="fill"
             />
     </android.support.v4.widget.NestedScrollView>
 
@@ -26,15 +28,28 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:contentScrim="?attr/colorPrimary">
+            app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleTextAppearance="@style/AppTheme.Widget.Toolbar.Text"
+            app:collapsedTitleTextAppearance="@style/AppTheme.Widget.Toolbar.Text"
+            app:expandedTitleMarginBottom="15dp"
+            app:expandedTitleMarginStart="15dp">
 
-            <ImageView
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="192dp"
+                android:layout_height="192dp">
                 app:layout_collapseMode="parallax"
                 app:layout_collapseParallaxMultiplier="0.7"
-                android:id="@+id/detail_image_wonder"
-                android:scaleType="centerCrop"/>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/detail_image_wonder"
+                    android:scaleType="centerCrop"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="#70000000"
+                    android:layout_alignParentBottom="true"/>
+            </RelativeLayout>
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
