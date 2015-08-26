@@ -3,6 +3,8 @@ package com.ciandt.worldwonders.ui.activities;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,21 +20,32 @@ import it.sephiroth.android.library.picasso.Picasso;
  * Created by jfranco on 8/26/15.
  */
 public class WonderDetailActivity extends BaseActivity {
+    private final String EXTRA_WONDER = "wonder";
 
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setContentView(R.layout.activity_detail);
 
-        Toolbar toolbar = new Toolbar(getApplicationContext());
-        setSupportActionBar(toolbar);
+        Wonder wonder = (Wonder) getIntent().getSerializableExtra(EXTRA_WONDER);
 
-        Wonder wonder = (Wonder) getIntent().getSerializableExtra("wonder");
+//        supportPostponeEnterTransition();
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        collapsingToolbarLayout.setTitle(wonder.getName());
+//        collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(R.color.transparent));
 
         TextView descriptionWonder = (TextView) findViewById(R.id.detail_description_wonder);
         descriptionWonder.setText(wonder.getDescription());
 
         ImageView imageView = (ImageView) findViewById(R.id.detail_image_wonder);
+
+//        ViewCompat.setTransitionName(findViewById(R.id.app_bar_layout), EXTRA_WONDER);
 
         Picasso.with(getApplicationContext())
                 .load(Helpers.getRawResourceID(getApplicationContext(), wonder.getPhoto().split("\\.")[0]))
