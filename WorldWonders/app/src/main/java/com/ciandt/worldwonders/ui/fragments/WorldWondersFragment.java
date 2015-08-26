@@ -78,7 +78,6 @@ public class WorldWondersFragment extends Fragment {
             @Override
             public void onSelectItem(Wonder wonder) {
                 callWonderDetailActivity(wonder);
-                Toast.makeText(getContext(), wonder.getName(), Toast.LENGTH_SHORT).show();
             }
         });
 

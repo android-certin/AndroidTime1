@@ -32,7 +32,8 @@
             app:expandedTitleTextAppearance="@style/AppTheme.Widget.Toolbar.Text"
             app:collapsedTitleTextAppearance="@style/AppTheme.Widget.Toolbar.Text"
             app:expandedTitleMarginBottom="15dp"
-            app:expandedTitleMarginStart="15dp">
+            app:expandedTitleMarginStart="15dp"
+            >
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -57,8 +58,8 @@
                 android:layout_width="match_parent"
                 android:background="@color/transparent"
                 app:layout_scrollFlags="scroll|enterAlways"
-                app:layout_collapseMode="pin" />
-
+                app:layout_collapseMode="pin"
+                />
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
