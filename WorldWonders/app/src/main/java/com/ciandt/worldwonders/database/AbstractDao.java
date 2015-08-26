@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Created by jfranco on 8/24/15.
  */
-public interface Dao<T> {
+public interface AbstractDao<T> {
     List<T> getAll();
     T getById(int id);
     List<T> search(String word);

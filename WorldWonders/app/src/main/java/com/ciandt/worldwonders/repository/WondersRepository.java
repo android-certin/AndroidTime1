@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
-import com.ciandt.worldwonders.database.Dao;
+import com.ciandt.worldwonders.database.AbstractDao;
 import com.ciandt.worldwonders.database.WonderDao;
 import com.ciandt.worldwonders.model.Wonder;
 
@@ -31,9 +31,9 @@ public class WondersRepository {
 
             @Override
             protected List<Wonder> doInBackground(Void... voids) {
-                Dao<Wonder> dao = new WonderDao(context);
-                List<Wonder> result = dao.getAll();
-                dao.close();
+                AbstractDao<Wonder> abstractDao = new WonderDao(context);
+                List<Wonder> result = abstractDao.getAll();
+                abstractDao.close();
 
                 return result;
             }

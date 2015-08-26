@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by jfranco on 8/24/15.
  */
-public class WonderDao implements Dao<Wonder> {
+public class WonderDao implements AbstractDao<Wonder> {
 
     private final String TABLE_NAME = "wonders";
 

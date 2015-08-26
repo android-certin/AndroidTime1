@@ -6,15 +6,11 @@ package com.ciandt.worldwonders.ui.activities;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 
 import com.ciandt.worldwonders.R;
-import com.ciandt.worldwonders.database.WonderDao;
 import com.ciandt.worldwonders.ui.fragments.LoginFragment;
 import com.ciandt.worldwonders.ui.fragments.WorldWondersFragment;
 import com.ciandt.worldwonders.model.Wonder;
-
-import java.util.ArrayList;
 
 
 public class MainActivity extends BaseActivity {

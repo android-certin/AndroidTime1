@@ -1,5 +1,6 @@
 package com.ciandt.worldwonders.ui.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,19 +18,17 @@ import com.ciandt.worldwonders.adapters.HighlightAdapter;
 import com.ciandt.worldwonders.adapters.WorldWonderAdapter;
 import com.ciandt.worldwonders.model.Wonder;
 import com.ciandt.worldwonders.repository.WondersRepository;
+import com.ciandt.worldwonders.ui.activities.WonderDetailActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import holders.WorldWonderHolder;
 
 /**
  * Created by jfranco on 8/24/15.
  */
 public class WorldWondersFragment extends Fragment {
 
-    private final static String WORLD_WONDERS = "wonders";
     ViewPager viewPager;
     RecyclerView recyclerView;
     ArrayList<Wonder> listWonder;
@@ -53,9 +52,6 @@ public class WorldWondersFragment extends Fragment {
         repository.getAll(new WondersRepository.WonderAllListener() {
             @Override
             public void onWonderAll(Exception exception, List<Wonder> wonders) {
-
-
-
                 createWorldWonder(wonders, view);
                 createHighlight(wonders);
             }
@@ -81,9 +77,15 @@ public class WorldWondersFragment extends Fragment {
         adapter.setOnSelectItem(new WorldWonderAdapter.OnSelectItem() {
             @Override
             public void onSelectItem(Wonder wonder) {
+                callWonderDetailActivity();
                 Toast.makeText(getContext(), wonder.getName(), Toast.LENGTH_SHORT).show();
             }
         });
 
+    }
+
+    private void callWonderDetailActivity() {
+        Intent wonderDetail = new Intent(getActivity(), WonderDetailActivity.class);
+        getActivity().startActivity(wonderDetail);
     }
 }

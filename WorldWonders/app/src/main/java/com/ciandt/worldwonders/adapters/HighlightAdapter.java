@@ -4,7 +4,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.ciandt.worldwonders.database.WonderDao;
 import com.ciandt.worldwonders.ui.fragments.HighlightFragment;
 import com.ciandt.worldwonders.model.Wonder;
 
@@ -15,7 +14,7 @@ import java.util.List;
  * Created by jfranco on 8/23/15.
  */
 public class HighlightAdapter extends FragmentPagerAdapter {
-    int pageCount;
+    private int pageCount;
     private final int LIMIT_PAGE = 3;
     List<Wonder> listaWonder;
 

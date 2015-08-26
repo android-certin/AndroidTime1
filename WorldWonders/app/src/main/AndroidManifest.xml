@@ -17,8 +17,10 @@
         </activity>
         <activity
             android:name=".ui.activities.SignupActivity"
-            android:label="Signup Activity"
-            />
+            android:label="Signup Activity"/>
+        <activity
+            android:name=".ui.activities.WonderDetailActivity"
+            android:label="Detail Activity"/>
     </application>
 
 
