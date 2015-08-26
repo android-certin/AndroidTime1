@@ -77,15 +77,16 @@ public class WorldWondersFragment extends Fragment {
         adapter.setOnSelectItem(new WorldWonderAdapter.OnSelectItem() {
             @Override
             public void onSelectItem(Wonder wonder) {
-                callWonderDetailActivity();
+                callWonderDetailActivity(wonder);
                 Toast.makeText(getContext(), wonder.getName(), Toast.LENGTH_SHORT).show();
             }
         });
 
     }
 
-    private void callWonderDetailActivity() {
-        Intent wonderDetail = new Intent(getActivity(), WonderDetailActivity.class);
+    private void callWonderDetailActivity(Wonder wonder) {
+        Intent wonderDetail = new Intent(WorldWondersFragment.this.getActivity(), WonderDetailActivity.class);
+        wonderDetail.putExtra("wonder", wonder);
         getActivity().startActivity(wonderDetail);
     }
 }

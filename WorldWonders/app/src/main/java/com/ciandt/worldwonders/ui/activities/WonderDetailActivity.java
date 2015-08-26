@@ -1,9 +1,17 @@
 package com.ciandt.worldwonders.ui.activities;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.support.v7.widget.Toolbar;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.ciandt.worldwonders.R;
+import com.ciandt.worldwonders.helpers.Helpers;
+import com.ciandt.worldwonders.model.Wonder;
+
+import it.sephiroth.android.library.picasso.Picasso;
 
 
 /**
@@ -12,8 +20,28 @@ import com.ciandt.worldwonders.R;
 public class WonderDetailActivity extends BaseActivity {
 
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    public void onCreate(Bundle bundle) {
+        super.onCreate(bundle);
         setContentView(R.layout.activity_detail);
+
+        Toolbar toolbar = new Toolbar(getApplicationContext());
+        setSupportActionBar(toolbar);
+
+        Wonder wonder = (Wonder) getIntent().getSerializableExtra("wonder");
+
+        TextView descriptionWonder = (TextView) findViewById(R.id.detail_description_wonder);
+        descriptionWonder.setText(wonder.getDescription());
+
+        ImageView imageView = (ImageView) findViewById(R.id.detail_image_wonder);
+
+        Picasso.with(getApplicationContext())
+                .load(Helpers.getRawResourceID(getApplicationContext(), wonder.getPhoto().split("\\.")[0]))
+                .config(Bitmap.Config.RGB_565)
+                .placeholder(R.raw.place_holder)
+                .error(R.raw.place_holder)
+                .centerCrop()
+                .resize(250, 165)
+                .into(imageView);
+
     }
 }

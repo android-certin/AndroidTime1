@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent" android:id="@+id/activity_detail">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" android:id="@+id/activity_detail">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -9,9 +11,22 @@
         android:minHeight="?attr/actionBarSize"
         style="@style/AppTheme.Widget.Toolbar.Transparent"/>
 
-    <EditText
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:text="zuzu"
         android:id="@+id/detail_description_wonder"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/detail_image_wonder"
+        android:layout_below="@+id/detail_description_wonder"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:scaleType="centerCrop"/>
+
+
 
 </RelativeLayout>
