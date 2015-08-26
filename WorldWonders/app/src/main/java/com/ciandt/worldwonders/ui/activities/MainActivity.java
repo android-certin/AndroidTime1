@@ -6,6 +6,7 @@ package com.ciandt.worldwonders.ui.activities;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.Toolbar;
 
 import com.ciandt.worldwonders.R;
 import com.ciandt.worldwonders.ui.fragments.LoginFragment;
@@ -19,6 +20,10 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Toolbar toolbar = (Toolbar)findViewById(R.id.main_toolbar);
+
+        setSupportActionBar(toolbar);
 
         addLoginFragment();
     }

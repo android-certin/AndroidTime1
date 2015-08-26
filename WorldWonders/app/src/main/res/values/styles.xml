@@ -25,6 +25,7 @@
     <style name="AppTheme.Widget.Button" parent="Widget.AppCompat.Button">
         <item name="android:minHeight">48dp</item>
         <item name="android:minWidth">88dp</item>
+        <item name="android:textColor">?attr/colorPrimaryDark</item>
     </style>
 
     <style name="AppTheme.TextApperance.Button" parent="TextAppearance.AppCompat.Button">
@@ -35,7 +36,7 @@
     </style>
 
     <style name="AppTheme.Widget.EditText" parent="Widget.AppCompat.EditText">
-        <item name="fontPath">fonts/Roboto-Medium.ttf</item>
+        <item name="fontPath">fonts/Roboto-Regular.ttf</item>
     </style>
 
 </resources>
