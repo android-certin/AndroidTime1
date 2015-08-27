@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatDialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.WebView;
@@ -15,7 +16,7 @@ import android.webkit.WebViewClient;
 import com.ciandt.worldwonders.R;
 import com.ciandt.worldwonders.model.Wonder;
 
-public class UrlLinkFragment extends android.support.v4.app.DialogFragment {
+public class UrlLinkFragment extends AppCompatDialogFragment {
 
     static public DialogFragment show(Wonder wonder, FragmentManager manager)  {
         UrlLinkFragment fragment = new UrlLinkFragment();
