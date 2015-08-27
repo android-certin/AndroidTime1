@@ -9,14 +9,29 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/detail_description_wonder"
-            android:layout_margin="10dp"
-            android:layout_gravity="fill"
-            />
+
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="match_parent" android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/detail_description_wonder"
+                android:layout_margin="10dp"
+                android:layout_gravity="fill"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:text="Fonte: wikipedia"
+                android:id="@+id/detail_link_wonder"
+                android:layout_margin="20dp"
+                android:textSize="13dp"
+                android:textColor="#0000FF"
+                />
+        </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
+
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar_layout"

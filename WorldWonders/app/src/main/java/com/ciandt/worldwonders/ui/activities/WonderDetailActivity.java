@@ -10,6 +10,7 @@ import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +19,8 @@ import com.ciandt.worldwonders.helpers.Helpers;
 import com.ciandt.worldwonders.model.Bookmark;
 import com.ciandt.worldwonders.model.Wonder;
 import com.ciandt.worldwonders.repository.WondersRepository;
+import com.ciandt.worldwonders.ui.fragments.UrlLinkFragment;
+
 import it.sephiroth.android.library.picasso.Picasso;
 
 
@@ -50,6 +53,16 @@ public class WonderDetailActivity extends BaseActivity {
 
         TextView descriptionWonder = (TextView) findViewById(R.id.detail_description_wonder);
         descriptionWonder.setText(wonder.getDescription());
+        TextView linkWonder = (TextView) findViewById(R.id.detail_link_wonder);
+        linkWonder.setText(wonder.getUrl());
+
+        linkWonder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UrlLinkFragment.show(wonder, WonderDetailActivity.this.getSupportFragmentManager());
+            }
+        });
+
 
         setImageOnDetail();
     }

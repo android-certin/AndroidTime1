@@ -6,4 +6,7 @@
     <string name="Login">Logar</string>
     <string name="SignUp">Cadastrar</string>
     <string name="Name">Name</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
