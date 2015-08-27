@@ -1,5 +1,6 @@
 package com.ciandt.worldwonders.ui.fragments;
 
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -32,6 +33,7 @@ public class WorldWondersFragment extends Fragment {
     ViewPager viewPager;
     RecyclerView recyclerView;
     ArrayList<Wonder> listWonder;
+    LoadingFragment loadingFragment;
 
     public static WorldWondersFragment newInstance() {
         return new WorldWondersFragment();
@@ -54,10 +56,11 @@ public class WorldWondersFragment extends Fragment {
             public void onWonderAll(Exception exception, List<Wonder> wonders) {
                 createWorldWonder(wonders, view);
                 createHighlight(wonders);
+                loadingFragment.getDialog().dismiss();
             }
         });
 
-
+        loadingFragment = (LoadingFragment) LoadingFragment.show(getFragmentManager());
     }
 
     public void createHighlight(List<Wonder> wonders) {
@@ -80,7 +83,6 @@ public class WorldWondersFragment extends Fragment {
                 callWonderDetailActivity(wonder);
             }
         });
-
     }
 
     private void callWonderDetailActivity(Wonder wonder) {
