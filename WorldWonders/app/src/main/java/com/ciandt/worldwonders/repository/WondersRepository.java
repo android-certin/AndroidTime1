@@ -81,6 +81,33 @@ public class WondersRepository {
     }
 
     @NonNull
+    public void deleteBookmark(final Bookmark bookmark, final BookmarkDeleteListener bookmarkDeleteListener) {
+
+        AsyncTask<Bookmark, Void, Boolean> asyncTask = new AsyncTask<Bookmark, Void, Boolean>() {
+
+            @Override
+            protected Boolean doInBackground(Bookmark... bookmarks) {
+                AbstractDao<Bookmark> abstractDao = new BookmarkDao(context);
+                Boolean result = abstractDao.delete(bookmark);
+                abstractDao.close();
+
+                return result;
+            }
+
+            @Override
+            protected void onPostExecute(Boolean result) {
+                super.onPostExecute(result);
+                bookmarkDeleteListener.onBookmarkDelete(null, result);
+                tasks.remove(this);
+            }
+        };
+
+        tasks.add(asyncTask);
+
+        asyncTask.execute();
+    }
+
+    @NonNull
     public void getAllBookmarks(final BookmarkAllListener bookmarkAllListener) {
 
         AsyncTask<Void, Void, List<Bookmark>> asyncTask = new AsyncTask<Void, Void, List<Bookmark>>() {
@@ -107,6 +134,33 @@ public class WondersRepository {
         asyncTask.execute();
     }
 
+    @NonNull
+    public void getBookmarkByWonder(final Integer idWonder, final BookmarkByWonderListener bookmarkByWonderListener) {
+
+        AsyncTask<Integer, Void, Bookmark> asyncTask = new AsyncTask<Integer, Void, Bookmark>() {
+
+            @Override
+            protected Bookmark doInBackground(Integer... integers) {
+                AbstractDao<Bookmark> abstractDao = new BookmarkDao(context);
+                Bookmark result = abstractDao.getById(idWonder);
+                abstractDao.close();
+
+                return result;
+            }
+
+            @Override
+            protected void onPostExecute(Bookmark bookmark) {
+                super.onPostExecute(bookmark);
+                bookmarkByWonderListener.onBookmarkByWonder(null, bookmark);
+                tasks.remove(this);
+            }
+        };
+
+        tasks.add(asyncTask);
+
+        asyncTask.execute();
+    }
+
     public void cancel() {
         for(AsyncTask asyncTask: tasks) {
             if(!asyncTask.isCancelled()) {
@@ -115,16 +169,24 @@ public class WondersRepository {
         }
     }
 
-    public interface BookmarkInsertListener{
-        void onBookmarkInsert(Exception exception, Boolean result);
-    }
-
     public interface  WonderAllListener{
         void onWonderAll(Exception exception, List<Wonder> wonders);
     }
 
     public interface  BookmarkAllListener{
         void onBookmarkAll(Exception exception, List<Bookmark> bookmarks);
+    }
+
+    public interface BookmarkInsertListener{
+        void onBookmarkInsert(Exception exception, Boolean result);
+    }
+
+    public interface BookmarkDeleteListener{
+        void onBookmarkDelete(Exception exception, Boolean result);
+    }
+
+    public interface BookmarkByWonderListener{
+        void onBookmarkByWonder(Exception exception, Bookmark bookmark);
     }
 
 }

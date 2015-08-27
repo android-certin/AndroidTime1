@@ -38,9 +38,9 @@ public class BookmarkDao implements AbstractDao<Bookmark> {
     }
 
     @Override
-    public Bookmark getById(int id) {
-        String where = "id = ?";
-        String[] whereArgs = new String[] {String.valueOf(id)};
+    public Bookmark getById(int idWonder) {
+        String where = "idWonders = ?";
+        String[] whereArgs = new String[] {String.valueOf(idWonder)};
         Cursor cursor = database.query(TABLE_NAME, null, where, whereArgs, null, null, null);
         Bookmark bookmark = null;
 
@@ -84,7 +84,7 @@ public class BookmarkDao implements AbstractDao<Bookmark> {
     @Override
     public boolean delete(Bookmark bookmark) {
         String where = "idWonders = ?";
-        String[] whereArgs = new String[] {String.valueOf(bookmark.getId())};
+        String[] whereArgs = new String[] {String.valueOf(bookmark.getIdWonders())};
         int rowIndex = database.delete(TABLE_NAME, where, whereArgs);
         return rowIndex != -1;
     }
