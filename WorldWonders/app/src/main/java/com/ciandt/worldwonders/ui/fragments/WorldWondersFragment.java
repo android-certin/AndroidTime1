@@ -5,13 +5,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.ciandt.worldwonders.R;
@@ -34,6 +38,8 @@ public class WorldWondersFragment extends Fragment {
     RecyclerView recyclerView;
     ArrayList<Wonder> listWonder;
     LoadingFragment loadingFragment;
+    WonderDetailFragment wonderDetailFragment;
+    FrameLayout wonderDetailLayout;
 
     public static WorldWondersFragment newInstance() {
         return new WorldWondersFragment();
@@ -56,17 +62,44 @@ public class WorldWondersFragment extends Fragment {
             public void onWonderAll(Exception exception, List<Wonder> wonders) {
                 createWorldWonder(wonders, view);
                 createHighlight(wonders);
+
+                if (wonderDetailLayout != null) {
+                    showDetailInFragment(wonders.get(0));
+                }
+
                 loadingFragment.dismiss();
             }
         });
 
         loadingFragment = (LoadingFragment) LoadingFragment.show(getFragmentManager());
+        wonderDetailLayout = (FrameLayout) view.findViewById(R.id.fragment_detail);
+    }
+
+    private void showDetailInFragment(Wonder wonder) {
+        if (wonderDetailFragment == null) {
+            FragmentManager fragmentManager = getFragmentManager();
+            wonderDetailFragment = new WonderDetailFragment();
+
+            Bundle args = new Bundle();
+            args.putSerializable("wonder", wonder);
+            wonderDetailFragment.setArguments(args);
+
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragment_detail, wonderDetailFragment, "detail")
+                    .commit();
+        }
+        else {
+            wonderDetailFragment.setWonder(wonder);
+        }
+
     }
 
     public void createHighlight(List<Wonder> wonders) {
-        Collections.shuffle(wonders);
-        HighlightAdapter highlightAdapter = new HighlightAdapter(getFragmentManager(), (ArrayList) wonders);
-        viewPager.setAdapter(highlightAdapter);
+        if (viewPager != null) {
+            Collections.shuffle(wonders);
+            HighlightAdapter highlightAdapter = new HighlightAdapter(getFragmentManager(), (ArrayList) wonders);
+            viewPager.setAdapter(highlightAdapter);
+        }
     }
 
     public void createWorldWonder (List<Wonder> wonders, View view) {
@@ -80,7 +113,12 @@ public class WorldWondersFragment extends Fragment {
         adapter.setOnSelectItem(new WorldWonderAdapter.OnSelectItem() {
             @Override
             public void onSelectItem(Wonder wonder) {
-                callWonderDetailActivity(wonder);
+                if (wonderDetailLayout != null) {
+                    showDetailInFragment(wonder);
+                }
+                else {
+                    callWonderDetailActivity(wonder);
+                }
             }
         });
     }

@@ -42,6 +42,12 @@ public class WonderDetailFragment extends Fragment {
     Bookmark bookmark;
     private ShareActionProvider mShareActionProvider;
 
+    private Toolbar toolbar;
+    private CollapsingToolbarLayout collapsingToolbarLayout;
+    private TextView descriptionWonder;
+    private TextView linkWonder;
+    private ImageView imageView;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,21 +57,32 @@ public class WonderDetailFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        collapsingToolbarLayout = (CollapsingToolbarLayout) view.findViewById(R.id.collapsing_toolbar);
+        descriptionWonder = (TextView) view.findViewById(R.id.detail_description_wonder);
+        linkWonder = (TextView) view.findViewById(R.id.detail_link_wonder);
+        imageView = (ImageView) view.findViewById(R.id.detail_image_wonder);
 
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        wonder = (Wonder) getActivity().getIntent().getSerializableExtra(EXTRA_WONDER);
+        Bundle args = getArguments();
+        if (args == null) {
+            wonder = (Wonder) getActivity().getIntent().getSerializableExtra(EXTRA_WONDER);
+            ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+        else {
+            wonder = (Wonder) args.getSerializable(EXTRA_WONDER);
+        }
+        if (wonder != null) {
+            setWonder(wonder);
+        }
+    }
 
-        CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) view.findViewById(R.id.collapsing_toolbar);
+    public void setWonder(final Wonder wonder) {
+        this.wonder = wonder;
         collapsingToolbarLayout.setTitle(wonder.getName());
-
-        TextView descriptionWonder = (TextView) view.findViewById(R.id.detail_description_wonder);
         descriptionWonder.setText(wonder.getDescription());
-        TextView linkWonder = (TextView) view.findViewById(R.id.detail_link_wonder);
         linkWonder.setText(wonder.getUrl());
-
         linkWonder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,12 +90,10 @@ public class WonderDetailFragment extends Fragment {
             }
         });
 
-
-        setImageOnDetail(view);
+        setImageOnDetail();
     }
 
-    private void setImageOnDetail(View view) {
-        ImageView imageView = (ImageView) view.findViewById(R.id.detail_image_wonder);
+    private void setImageOnDetail() {
 
         Picasso.with(getContext())
                 .load(Helpers.getRawResourceID(getContext(), wonder.getPhoto().split("\\.")[0]))
