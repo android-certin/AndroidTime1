@@ -10,7 +10,7 @@
             android:name=".ui.activities.MainActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop"
-            android:screenOrientation="nosensor" >
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -18,10 +18,12 @@
         </activity>
         <activity
             android:name=".ui.activities.SignupActivity"
-            android:label="Signup Activity"/>
+            android:label="Signup Activity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.activities.WonderDetailActivity"
             android:label="Detail Activity"
+            android:screenOrientation="portrait"
             android:parentActivityName=".ui.activities.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

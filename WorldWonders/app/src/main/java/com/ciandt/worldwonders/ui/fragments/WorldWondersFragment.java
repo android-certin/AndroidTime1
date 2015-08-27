@@ -76,22 +76,16 @@ public class WorldWondersFragment extends Fragment {
     }
 
     private void showDetailInFragment(Wonder wonder) {
-        if (wonderDetailFragment == null) {
-            FragmentManager fragmentManager = getFragmentManager();
-            wonderDetailFragment = new WonderDetailFragment();
+        FragmentManager fragmentManager = getFragmentManager();
+        wonderDetailFragment = new WonderDetailFragment();
 
-            Bundle args = new Bundle();
-            args.putSerializable("wonder", wonder);
-            wonderDetailFragment.setArguments(args);
+        Bundle args = new Bundle();
+        args.putSerializable("wonder", wonder);
+        wonderDetailFragment.setArguments(args);
 
-            fragmentManager.beginTransaction()
-                    .replace(R.id.fragment_detail, wonderDetailFragment, "detail")
-                    .commit();
-        }
-        else {
-            wonderDetailFragment.setWonder(wonder);
-        }
-
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragment_detail, wonderDetailFragment, "detail")
+                .commit();
     }
 
     public void createHighlight(List<Wonder> wonders) {

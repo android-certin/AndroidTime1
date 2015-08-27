@@ -78,7 +78,7 @@ public class WonderDetailFragment extends Fragment {
         }
     }
 
-    public void setWonder(final Wonder wonder) {
+    private void setWonder(final Wonder wonder) {
         this.wonder = wonder;
         collapsingToolbarLayout.setTitle(wonder.getName());
         descriptionWonder.setText(wonder.getDescription());
@@ -140,6 +140,8 @@ public class WonderDetailFragment extends Fragment {
         if (bookmark != null) {
             this.bookmark = bookmark;
             bookmarkMenuItem.setIcon(R.drawable.ic_bookmark_white_24dp);
+        } else {
+            bookmarkMenuItem.setIcon(R.drawable.ic_bookmark_border_white_24dp);
         }
     }
 
@@ -207,6 +209,7 @@ public class WonderDetailFragment extends Fragment {
             @Override
             public void onBookmarkDelete(Exception exception, Boolean result) {
                 isDeleted(result);
+                bookmark = null;
             }
         });
     }
