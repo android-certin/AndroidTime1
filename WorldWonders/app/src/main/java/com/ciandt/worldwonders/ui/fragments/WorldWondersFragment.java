@@ -56,7 +56,7 @@ public class WorldWondersFragment extends Fragment {
             public void onWonderAll(Exception exception, List<Wonder> wonders) {
                 createWorldWonder(wonders, view);
                 createHighlight(wonders);
-                loadingFragment.getDialog().dismiss();
+                loadingFragment.dismiss();
             }
         });
 

@@ -30,6 +30,7 @@ public class LoadingFragment extends DialogFragment {
     public static DialogFragment show(FragmentManager fragmentManager) {
         LoadingFragment fragment = new LoadingFragment();
         fragment.show(fragmentManager, FRAGMENT_TAG);
+        fragment.setCancelable(false);
         return fragment;
     }
 
@@ -39,8 +40,6 @@ public class LoadingFragment extends DialogFragment {
         AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
             .setView(view)
             .create();
-
-        alertDialog.setCancelable(false);
 
         cameraImageView = (ImageView)view.findViewById(R.id.image_camera);
         eiffelTowerImageView = (ImageView)view.findViewById(R.id.image_eiffel_tower);
