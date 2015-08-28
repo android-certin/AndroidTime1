@@ -16,18 +16,18 @@ import java.util.List;
 public class HighlightAdapter extends FragmentPagerAdapter {
     private int pageCount;
     private final int LIMIT_PAGE = 3;
-    List<Wonder> listaWonder;
+    List<Wonder> listWonder;
 
     public HighlightAdapter(FragmentManager fragmentManager, ArrayList<Wonder> listWonder) {
 
         super(fragmentManager);
         this.pageCount = LIMIT_PAGE;
-        this.listaWonder = listWonder;
+        this.listWonder = listWonder;
     }
 
     @Override
     public Fragment getItem(int position) {
-        HighlightFragment wonderFragment = HighlightFragment.newInstance(listaWonder.get(position));
+        HighlightFragment wonderFragment = HighlightFragment.newInstance(listWonder.get(position));
         return wonderFragment;
     }
 

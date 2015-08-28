@@ -18,14 +18,23 @@ public class WorldWondersApp extends Application {
     public void onCreate() {
         super.onCreate();
 
-        if (!WondersSQLiteHelper.checkOpenDatabase()) {
-            try {
-                WondersSQLiteHelper.createDatabase(this);
-            } catch (IOException e) {
-                Log.i("WorldWondersApp", "Falha ao criar base de dados", e);
-            }
-        }
+        initDatabase();
 
+        initStetho();
+
+        initCalligraphy();
+
+    }
+
+    private void initCalligraphy() {
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                        .setDefaultFontPath("fonts/Roboto-Thin.ttf")
+                        .setFontAttrId(R.attr.fontPath)
+                        .build()
+        );
+    }
+
+    private void initStetho() {
         Stetho.initialize(
                 Stetho.newInitializerBuilder(this)
                         .enableDumpapp(
@@ -33,13 +42,15 @@ public class WorldWondersApp extends Application {
                         .enableWebKitInspector(
                                 Stetho.defaultInspectorModulesProvider(this))
                         .build());
+    }
 
-        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                .setDefaultFontPath("fonts/Roboto-Thin.ttf")
-                .setFontAttrId(R.attr.fontPath)
-                .build()
-        );
-
-
+    private void initDatabase() {
+        if (!WondersSQLiteHelper.checkOpenDatabase()) {
+            try {
+                WondersSQLiteHelper.createDatabase(this);
+            } catch (IOException e) {
+                Log.i("WorldWondersApp", "Falha ao criar base de dados", e);
+            }
+        }
     }
 }
