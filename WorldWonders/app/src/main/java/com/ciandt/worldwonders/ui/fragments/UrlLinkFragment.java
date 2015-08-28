@@ -67,4 +67,5 @@ public class UrlLinkFragment extends AppCompatDialogFragment {
         sourceView.setWebViewClient(new WebViewClient());
         sourceView.loadUrl(wonder.getUrl());
     }
+
 }

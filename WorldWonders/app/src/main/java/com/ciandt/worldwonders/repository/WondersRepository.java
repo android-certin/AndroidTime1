@@ -144,7 +144,9 @@ public class WondersRepository {
                 AbstractDao<Bookmark> abstractDao = new BookmarkDao(context);
                 Bookmark result = abstractDao.getById(idWonder);
                 abstractDao.close();
-
+                if(result != null && result.getId() != 0) {
+                    result.setIdWonders(idWonder);
+                }
                 return result;
             }
 

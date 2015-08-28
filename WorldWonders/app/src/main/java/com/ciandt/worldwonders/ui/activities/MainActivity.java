@@ -24,6 +24,7 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         addLoginFragment();
 
         if (Helpers.isTablet(this)) {

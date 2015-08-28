@@ -11,7 +11,6 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -26,7 +25,6 @@ import com.ciandt.worldwonders.helpers.Helpers;
 import com.ciandt.worldwonders.model.Bookmark;
 import com.ciandt.worldwonders.model.Wonder;
 import com.ciandt.worldwonders.repository.WondersRepository;
-import com.ciandt.worldwonders.ui.fragments.UrlLinkFragment;
 
 import it.sephiroth.android.library.picasso.Picasso;
 
@@ -37,8 +35,6 @@ public class WonderDetailFragment extends Fragment {
     private final String EXTRA_WONDER = "wonder";
     private Wonder wonder;
     WondersRepository repository;
-    MenuItem bookmarkMenuItem;
-    private Menu menu;
     Bookmark bookmark;
     private ShareActionProvider mShareActionProvider;
 
@@ -69,8 +65,7 @@ public class WonderDetailFragment extends Fragment {
         if (args == null) {
             wonder = (Wonder) getActivity().getIntent().getSerializableExtra(EXTRA_WONDER);
             ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
-        else {
+        } else {
             wonder = (Wonder) args.getSerializable(EXTRA_WONDER);
         }
         if (wonder != null) {
@@ -107,41 +102,38 @@ public class WonderDetailFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        this.menu = menu;
 
-        inflater.inflate(R.menu.menu_main, this.menu);
+        inflater.inflate(R.menu.menu_main, menu);
 
-        checkWonderDirections();
+        checkWonderDirections(menu.findItem(R.id.action_direction));
 
-        checkWonderHasBookmark();
+        checkWonderHasBookmark(menu.findItem(R.id.action_bookmark));
     }
 
-    private void checkWonderDirections() {
-        MenuItem directionsItem = menu.findItem(R.id.action_direction);
+    private void checkWonderDirections(MenuItem menuItem) {
         if (wonder.getLatitude() == 0.0 && wonder.getLongitude() == 0.0) {
-            directionsItem.setVisible(false);
+            menuItem.setVisible(false);
         }
     }
 
-    private void checkWonderHasBookmark() {
-        bookmarkMenuItem = menu.findItem(R.id.action_bookmark);
+    private void checkWonderHasBookmark(final MenuItem menuItem) {
         repository = new WondersRepository(getContext());
         repository.getBookmarkByWonder(wonder.getId(), new WondersRepository.BookmarkByWonderListener() {
             @Override
             public void onBookmarkByWonder(Exception exception, Bookmark bookmark) {
-                checkBookmarkOnWonder(bookmark);
+                checkBookmarkOnWonder(bookmark, menuItem);
             }
         });
 
-        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(bookmarkMenuItem);
+        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
     }
 
-    private void checkBookmarkOnWonder(Bookmark bookmark) {
-        if (bookmark != null) {
+    private void checkBookmarkOnWonder(Bookmark bookmark, final MenuItem menuItem) {
+        if (bookmark != null && bookmark.getIdWonders() != 0) {
             this.bookmark = bookmark;
-            bookmarkMenuItem.setIcon(R.drawable.ic_bookmark_white_24dp);
+            menuItem.setIcon(R.drawable.ic_bookmark_white_24dp);
         } else {
-            bookmarkMenuItem.setIcon(R.drawable.ic_bookmark_border_white_24dp);
+            menuItem.setIcon(R.drawable.ic_bookmark_border_white_24dp);
         }
     }
 
@@ -154,7 +146,7 @@ public class WonderDetailFragment extends Fragment {
                 break;
 
             case R.id.action_bookmark:
-                bookmarkAction();
+                addBookmark(item);
 
                 break;
 
@@ -174,53 +166,53 @@ public class WonderDetailFragment extends Fragment {
         startActivity(sendIntent);
     }
 
-    private void bookmarkAction() {
+    private void addBookmark(MenuItem menuItem) {
         repository = new WondersRepository(getContext());
         if(bookmark == null) {
-            insertBookmark();
+            insertBookmark(menuItem);
         } else {
-            removeBookmark();
+            removeBookmark(menuItem);
         }
     }
 
-    private void insertBookmark() {
+    private void insertBookmark(final MenuItem menuItem) {
         bookmark = new Bookmark();
         bookmark.setIdWonders(wonder.getId());
         repository.insertBookmark(bookmark, new WondersRepository.BookmarkInsertListener() {
             @Override
             public void onBookmarkInsert(Exception exception, Boolean result) {
-                isInserted(result);
+                isInserted(result, menuItem);
             }
         });
     }
 
-    private void isInserted(Boolean result) {
+    private void isInserted(Boolean result, MenuItem menuItem) {
         if(result) {
             Toast.makeText(getContext(), "Bookmark salvo com sucesso.", Toast.LENGTH_SHORT).show();
-            bookmarkMenuItem.setIcon(R.drawable.ic_bookmark_white_24dp);
+            menuItem.setIcon(R.drawable.ic_bookmark_white_24dp);
         } else {
             Toast.makeText(getContext(), "Erro ao salvar o Bookmark.", Toast.LENGTH_SHORT).show();
-            bookmarkMenuItem.setIcon(R.drawable.ic_bookmark_border_white_24dp);
+            menuItem.setIcon(R.drawable.ic_bookmark_border_white_24dp);
         }
     }
 
-    private void removeBookmark() {
+    private void removeBookmark(final MenuItem menuItem) {
         repository.deleteBookmark(bookmark, new WondersRepository.BookmarkDeleteListener() {
             @Override
             public void onBookmarkDelete(Exception exception, Boolean result) {
-                isDeleted(result);
+                isDeleted(result, menuItem);
                 bookmark = null;
             }
         });
     }
 
-    private void isDeleted(Boolean result) {
+    private void isDeleted(Boolean result, MenuItem menuItem) {
         if(result) {
             Toast.makeText(getContext(), "Bookmark removido com sucesso.", Toast.LENGTH_SHORT).show();
-            bookmarkMenuItem.setIcon(R.drawable.ic_bookmark_border_white_24dp);
+            menuItem.setIcon(R.drawable.ic_bookmark_border_white_24dp);
         } else {
             Toast.makeText(getContext(), "Erro ao remover o Bookmark.", Toast.LENGTH_SHORT).show();
-            bookmarkMenuItem.setIcon(R.drawable.ic_bookmark_white_24dp);
+            menuItem.setIcon(R.drawable.ic_bookmark_white_24dp);
         }
     }
 
