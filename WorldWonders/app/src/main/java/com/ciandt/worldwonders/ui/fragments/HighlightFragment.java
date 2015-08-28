@@ -52,7 +52,7 @@ public class HighlightFragment extends Fragment {
 
             Picasso.with(view.getContext())
                     .load(Helpers.getRawResourceID(view.getContext(), wonder.getPhoto().split("\\.")[0]))
-                    .config(Bitmap.Config.RGB_565)
+                    .config(Bitmap.Config.ARGB_8888)
                     .placeholder(R.raw.place_holder)
                     .error(R.raw.place_holder)
                     .centerCrop()

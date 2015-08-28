@@ -25,6 +25,6 @@ public class SquareImageView extends ImageView {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         //Para formar um quadrado.
-        setMeasuredDimension(getMeasuredWidth(), getMeasuredWidth());
+        setMeasuredDimension(getMeasuredWidth() == 0 ? getMeasuredHeight() : getMeasuredWidth(), getMeasuredHeight() < getMeasuredWidth() ? getMeasuredWidth() : getMeasuredHeight());
     }
 }

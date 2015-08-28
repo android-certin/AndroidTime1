@@ -89,7 +89,7 @@ public class WorldWondersFragment extends Fragment {
         if(!Helpers.isTablet(getContext())) {
             recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false));
         } else {
-            GridLayoutManager gridLayoutManager = new GridLayoutManager(this.getContext(), 2);
+            GridLayoutManager gridLayoutManager = new GridLayoutManager(this.getContext(), 3);
             gridLayoutManager.offsetChildrenVertical(0);
             gridLayoutManager.offsetChildrenHorizontal(0);
             recyclerView.setLayoutManager(gridLayoutManager);

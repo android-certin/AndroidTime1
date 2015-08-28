@@ -141,11 +141,9 @@ public class WonderDetailFragment extends AppCompatDialogFragment {
 
         Picasso.with(getContext())
                 .load(Helpers.getRawResourceID(getContext(), wonder.getPhoto().split("\\.")[0]))
-                .config(Bitmap.Config.RGB_565)
+                .config(Bitmap.Config.ARGB_8888)
                 .placeholder(R.raw.place_holder)
                 .error(R.raw.place_holder)
-                .centerCrop()
-                .resize(250, 165)
                 .into(imageView);
     }
 
