@@ -7,13 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.ciandt.worldwonders.R;
 import com.ciandt.worldwonders.helpers.Helpers;
 import com.ciandt.worldwonders.model.Wonder;
 import java.util.ArrayList;
-import holders.WorldWonderHolder;
+import com.ciandt.worldwonders.holders.WorldWonderHolder;
 import it.sephiroth.android.library.picasso.Picasso;
 
 /**

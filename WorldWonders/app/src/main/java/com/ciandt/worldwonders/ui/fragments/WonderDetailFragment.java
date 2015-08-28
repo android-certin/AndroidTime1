@@ -1,14 +1,20 @@
 package com.ciandt.worldwonders.ui.fragments;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDialogFragment;
 import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -31,7 +37,7 @@ import it.sephiroth.android.library.picasso.Picasso;
 /**
  * Created by andersonr on 27/08/15.
  */
-public class WonderDetailFragment extends Fragment {
+public class WonderDetailFragment extends AppCompatDialogFragment {
     private final String EXTRA_WONDER = "wonder";
     private Wonder wonder;
     WondersRepository repository;
@@ -48,7 +54,11 @@ public class WonderDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-        return inflater.inflate(R.layout.fragment_detail, container, false);
+        if(Helpers.isTablet(getContext())) {
+           return super.onCreateView(inflater, container, savedInstanceState);
+        } else {
+            return inflater.inflate(R.layout.fragment_detail, container, false);
+        }
     }
 
     @Override
@@ -71,6 +81,45 @@ public class WonderDetailFragment extends Fragment {
         if (wonder != null) {
             setWonder(wonder);
         }
+    }
+
+    static WonderDetailFragment show(Wonder wonder, FragmentManager fragmentManager) {
+        WonderDetailFragment wonderDialogFragment = new WonderDetailFragment();
+        Bundle bundle = new Bundle();
+
+        bundle.putSerializable("wonder", wonder);
+        wonderDialogFragment.setArguments(bundle);
+
+        wonderDialogFragment.show(fragmentManager, "wonder_dialog");
+
+        return wonderDialogFragment;
+    }
+
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_detail, null);
+
+        Bundle args = getArguments();
+        Wonder wonder = (Wonder) args.getSerializable("wonder");
+
+        AlertDialog alertDialog = createAlertDialog(view, wonder);
+        onViewCreated(view, savedInstanceState);
+        return alertDialog;
+    }
+
+    @NonNull
+    private AlertDialog createAlertDialog(View view, Wonder wonder) {
+        return new AlertDialog
+                .Builder(getActivity())
+                .setTitle(wonder.getName())
+                .setView(view)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .create();
     }
 
     private void setWonder(final Wonder wonder) {
